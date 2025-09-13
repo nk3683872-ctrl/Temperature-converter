@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f2f5;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 300px;
+      text-align: center;
+    }
+    input, select, button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #result {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Temperature Converter</h2>
+    
+    <input type="number" id="degrees" placeholder="Enter temperature">
+    
+    <select id="type">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+    
+    <button onclick="convertTemp()">Convert</button>
+    
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function convertTemp() {
+      let degrees = parseFloat(document.getElementById("degrees").value);
+      let type = document.getElementById("type").value;
+      let result = "";
+
+      if (isNaN(degrees)) {
+        result = "Please enter a valid number!";
+      } else {
+        if (type === "celsius") {
+          result = `${degrees} °C = ${(degrees * 9/5 + 32).toFixed(2)} °F | ${(degrees + 273.15).toFixed(2)} K`;
+        } 
+        else if (type === "fahrenheit") {
+          result = `${degrees} °F = ${((degrees - 32) * 5/9).toFixed(2)} °C | ${(((degrees - 32) * 5/9) + 273.15).toFixed(2)} K`;
+        } 
+        else if (type === "kelvin") {
+          result = `${degrees} K = ${(degrees - 273.15).toFixed(2)} °C | ${((degrees - 273.15) * 9/5 + 32).toFixed(2)} °F`;
+        }
+      }
+      
+      document.getElementById("result").innerText = result;
+    }
+  </script>
+</body>
+</html>
